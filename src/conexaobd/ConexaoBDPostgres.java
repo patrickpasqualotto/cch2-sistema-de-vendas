@@ -25,7 +25,7 @@ public class ConexaoBDPostgres {
             System.out.println("Conexao Realizada Com Sucesso!!");
 
         } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("Nao foi possível conenectar com o Banco de dados!!");]
+            System.out.println("Nao foi possível conenectar com o Banco de dados!!");
             conexao = null;
         }
 

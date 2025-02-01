@@ -1,0 +1,42 @@
+CREATE TABLE tb_fornecedores(
+	cod_fornecedor BIGINT PRIMARY KEY,
+	des_fornecedor VARCHAR(45)
+)
+-- se a gente considerar que esse codigo do fornecedor for ser autoincrementado trocar o bigint por bigserial
+
+CREATE TABLE tb_produtos(
+	cod_produto BIGINT PRIMARY KEY,
+	des_produto VARCHAR(45),
+	val_produto DECIMAL,
+	qte_produto INT,
+	cod_fornecedor BIGINT,
+	CONSTRAINT fk_forpro FOREIGN KEY (cod_fornecedor) REFERENCES tb_fornecedores(cod_fornecedor)
+)
+CREATE TABLE tb_funcionarios(
+	cod_funcionario BIGINT PRIMARY KEY,
+	nom_funcionario VARCHAR(45),
+	cpf_funcionario VARCHAR(14),
+	sen_funcionario VARCHAR(50),
+	fun_funcionario VARCHAR(50)
+)
+
+CREATE TABLE tb_vendas(
+	cod_venda BIGINT PRIMARY KEY,
+	time_venda TIMESTAMP,
+	val_total_venda DECIMAL(7,2),
+	cod_funcionario BIGINT,
+	CONSTRAINT fk_funven FOREIGN KEY (cod_funcionario) REFERENCES tb_funcionarios(cod_funcionario)
+)
+
+CREATE TABLE tb_itens(
+	cod_item BIGINT PRIMARY KEY,
+	qte_item int,
+	val_parcial_item DECIMAL(7,2),
+	cod_produto BIGINT,
+	cod_venda BIGINT,
+	CONSTRAINT fk_proitem FOREIGN KEY (cod_produto) REFERENCES tb_produtos(cod_produto),
+	CONSTRAINT fk_venitem FOREIGN KEY (cod_venda) REFERENCES tb_vendas(cod_venda)
+)
+
+DROP TABLE tb_itens
+
